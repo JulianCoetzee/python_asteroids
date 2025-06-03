@@ -6,6 +6,8 @@ from constants import SCREEN_WIDTH, SCREEN_HEIGHT, ASTEROID_KINDS, ASTEROID_MIN_
 
 def main():
     pygame.init()
+    frame_clock = pygame.time.Clock()
+    dt = 0
     print("Starting Asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
@@ -16,6 +18,8 @@ def main():
             if event.type == pygame.QUIT:
                 return
         screen.fill("black")
+        # Setting FPS to 60
+        dt = frame_clock.tick(60)/1000
         pygame.display.flip()
 
 
