@@ -3,6 +3,7 @@
 # throughout this file
 import pygame
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT, ASTEROID_KINDS, ASTEROID_MIN_RADIUS, ASTEROID_MAX_RADIUS, ASTEROID_SPAWN_RATE
+from player import Player
 
 def main():
     pygame.init()
@@ -12,12 +13,15 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    # spawn player
+    p1 = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
     while pygame.get_init():
         for event in pygame.event.get():
             # make the window CLOSE button work
             if event.type == pygame.QUIT:
                 return
         screen.fill("black")
+        p1.draw(screen)
         # Setting FPS to 60
         dt = frame_clock.tick(60)/1000
         pygame.display.flip()
