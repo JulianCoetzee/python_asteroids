@@ -13,17 +13,25 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    # object groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
     # spawn player
     p1 = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+    print(updatable)
+    print(drawable)
     while pygame.get_init():
         for event in pygame.event.get():
             # make the window CLOSE button work
             if event.type == pygame.QUIT:
                 return
         screen.fill("black")
-        p1.draw(screen)
+        for object in drawable:
+            object.draw(screen)
         # Setting FPS to 60
         dt = frame_clock.tick(60)/1000
+        updatable.update(dt)
         pygame.display.flip()
 
 
