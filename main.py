@@ -3,6 +3,8 @@
 # throughout this file
 import pygame
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT, ASTEROID_KINDS, ASTEROID_MIN_RADIUS, ASTEROID_MAX_RADIUS, ASTEROID_SPAWN_RATE
+from asteroidfield import AsteroidField
+from asteroid import Asteroid
 from player import Player
 
 def main():
@@ -16,11 +18,16 @@ def main():
     # object groups
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
+    AsteroidField.containers = (updatable)
     Player.containers = (updatable, drawable)
+    Asteroid.containers = (updatable, drawable, asteroids)
+    field = AsteroidField()
     # spawn player
     p1 = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
     print(updatable)
     print(drawable)
+    print(asteroids)
     while pygame.get_init():
         for event in pygame.event.get():
             # make the window CLOSE button work
