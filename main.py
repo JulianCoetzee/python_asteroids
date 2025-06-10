@@ -5,7 +5,9 @@ import pygame
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT, ASTEROID_KINDS, ASTEROID_MIN_RADIUS, ASTEROID_MAX_RADIUS, ASTEROID_SPAWN_RATE
 from asteroidfield import AsteroidField
 from asteroid import Asteroid
+from circleshape import CircleShape
 from player import Player
+from shot import Shot
 
 def main():
     pygame.init()
@@ -19,15 +21,18 @@ def main():
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
     AsteroidField.containers = (updatable)
     Player.containers = (updatable, drawable)
     Asteroid.containers = (updatable, drawable, asteroids)
+    Shot.containers = (updatable, drawable, shots)
     field = AsteroidField()
     # spawn player
     p1 = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
     print(updatable)
     print(drawable)
     print(asteroids)
+    print(shots)
     while pygame.get_init():
         for event in pygame.event.get():
             # make the window CLOSE button work
@@ -39,6 +44,10 @@ def main():
         # Setting FPS to 60
         dt = frame_clock.tick(60)/1000
         updatable.update(dt)
+        for asteroid in asteroids:
+            if asteroid.is_collision(p1):
+                print("Game over!")
+                return
         pygame.display.flip()
 
 
