@@ -29,10 +29,6 @@ def main():
     field = AsteroidField()
     # spawn player
     p1 = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
-    print(updatable)
-    print(drawable)
-    print(asteroids)
-    print(shots)
     while pygame.get_init():
         for event in pygame.event.get():
             # make the window CLOSE button work
